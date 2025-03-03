@@ -1,1 +1,66 @@
-osx_script: "~/.osx --no-restart"
+---
+- name: Set up a macOS environment
+  hosts: localhost
+  connection: local
+  tasks:
+    - name: Check if Homebrew is installed
+      stat:
+        path: /usr/local/bin/brew
+      register: homebrew_check
+
+    - name: Install Homebrew if not present
+      shell: /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+      when: not homebrew_check.stat.exists
+
+    - name: Update Homebrew
+      command: brew update
+      changed_when: false
+
+    - name: Install common software with Homebrew
+      homebrew:
+        name:
+          - git
+        state: present
+
+    - name: Install Homebrew casks (GUI apps)
+      homebrew_cask:
+        name:
+          - brave-browser
+          - clip-studio-paint
+          - discord@canary
+          - handbrake
+          - jellyfin-media-player
+          - parsec
+          - sublime-text
+          - slack
+          - transmit
+          - vmware-fusion
+          - warp
+          - zen-browser
+          - zed
+        state: present
+
+    - name: Set macOS dock to auto-hide
+      shell: defaults write com.apple.dock autohide -bool true && killall Dock
+      changed_when: false
+
+    - name: Ensure .zshrc exists
+      file:
+        path: ~/.zshrc
+        state: touch
+        mode: "0644"
+
+    - name: Add custom alias to .zshrc
+      lineinfile:
+        path: ~/.zshrc
+        line: 'alias ll="ls -la"'
+        state: present
+
+    - name: Run .osx script
+      git:
+        repo: lavavex/dotfiles
+        file: .osx
+        dest: ~/
+      shell: ~/.osx --no-restart
+      changed_when: false
+      ignore_errors: yes
