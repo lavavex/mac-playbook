@@ -65,6 +65,7 @@
           - discord@canary
           - handbrake
           - jellyfin-media-player
+          - linearmouse
           - microsoft-office-buisnesspro
           - parsec
           - sublime-text
@@ -118,8 +119,8 @@
     - name: MAS
       community.general.mas:
         id:
-          - 1451685025
-          - 441258766
+          - 1451685025 #Wireguard-GUI
+          - 441258766 #Magnet
         state: present
         upgrade_all: true
 
