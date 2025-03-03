@@ -1,7 +1,51 @@
 ---
-- name: Set up a macOS environment
+- name: Configure macOS
   hosts: localhost
-  connection: local
+  
+  vars:
+    dockitems_remove:
+      - TV
+      - Podcasts
+      - Mail
+      - Maps
+      - FaceTime
+      - Calendar
+      - Contacts
+      - Reminders
+      - Notes
+      - Freeform
+      - News
+      - Photos
+      - Safari
+      - Messages
+      - 'App Store'
+      - 'System Settings'
+
+    dockitems_persist:
+      - name: "Brave"
+        path: "/Applications/Brave Browser.app/"
+        pos: 2
+      - name: "Discord Canary"
+        path: "/Applications/Discord Canary.app"
+        pos: 3
+      - name: "Sublime Text"
+        path: "/Applications/Sublime Text.app/"
+        pos: 4
+      - name: "Zed"
+        path: "/Applications/Zed.app"
+        pos: 5
+      - name: "Warp"
+        path: "/Applications/Warp.app"
+        pos: 6
+      - name: "Music"
+        path: "/Applications/Music.app"
+        pos: 7
+      - name: "Settings"
+        path: "/Applications/System Settings.app"
+        pos: 8
+
+
+
   tasks:
     - name: Update Homebrew
       command: brew update
@@ -50,7 +94,8 @@
       git:
         repo: https://github.com/lavavex/dotfiles.git
         dest: ~/dotfiles
-        clone: yes
+        clone: true
+        force: true
       changed_when: false
 
     - name: Download .osx script from github
@@ -61,6 +106,11 @@
       changed_when: false
 
     - name: Run .osx script
-      shell: ~/dotfiles/.osx --no-restart
+      shell: "~/dotfiles/.osx --no-restart"
       changed_when: false
       ignore_errors: true
+
+    - name: Docking
+      import_role:
+        name: geerlingguy.mac.dock
+
