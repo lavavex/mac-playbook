@@ -1,7 +1,8 @@
 ---
 roles:
   - name: elliotweiser.osx-command-line-tools
+  - name: community.general.mas
 
 collections:
   - name: geerlingguy.mac
-  - name: community.general.mas
+
