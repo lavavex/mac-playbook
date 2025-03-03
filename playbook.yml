@@ -22,8 +22,8 @@
       - 'System Settings'
 
     dockitems_persist:
-      - name: "Brave"
-        path: "/Applications/Brave Browser.app/"
+      - name: "Floorp"
+        path: "/Applications/Floorp.app/"
         pos: 2
       - name: "Discord Canary"
         path: "/Applications/Discord Canary.app"
