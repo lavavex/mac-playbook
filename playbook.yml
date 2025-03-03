@@ -55,6 +55,7 @@
       homebrew:
         name:
           - git
+          - mas
         state: present
 
     - name: Install Homebrew casks (GUI apps)
