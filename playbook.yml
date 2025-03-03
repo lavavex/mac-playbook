@@ -49,18 +49,18 @@
     - name: download dotfiles from github
       git:
         repo: https://github.com/lavavex/dotfiles.git
-        dest: ~/
+        dest: ~/dotfiles
         clone: yes
       changed_when: false
 
     - name: Download .osx script from github
       get_url:
         url: https://raw.githubusercontent.com/lavavex/dotfiles/refs/heads/main/.osx
-        dest: ~/.osx
+        dest: ~/dotfiles/.osx
         mode: "0755"
       changed_when: false
 
     - name: Run .osx script
-      shell: ~/.osx --no-restart
+      shell: ~/dotfiles/.osx --no-restart
       changed_when: false
       ignore_errors: true
