@@ -115,3 +115,11 @@
       import_role:
         name: geerlingguy.mac.dock
 
+    - name: MAS
+      community.general.mas:
+        id:
+          - 1451685025
+          - 441258766
+        state: present
+        upgrade_all: true
+
