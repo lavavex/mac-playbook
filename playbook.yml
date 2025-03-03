@@ -46,6 +46,13 @@
         line: 'alias ll="ls -la"'
         state: present
 
+    - name: download dotfiles from github
+      git:
+        repo: lavavex/dotfiles
+        dest: ~/
+        clone: yes
+      changed_when: false
+
     - name: Download .osx script from github
       get_url:
         url: https://https://raw.githubusercontent.com/lavavex/dotfiles/refs/heads/main/.osx
@@ -56,4 +63,4 @@
     - name: Run .osx script
       shell: ~/.osx --no-restart
       changed_when: false
-      ignore_errors: yes
+      ignore_errors: true
