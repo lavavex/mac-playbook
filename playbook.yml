@@ -48,14 +48,14 @@
 
     - name: download dotfiles from github
       git:
-        repo: lavavex/dotfiles
+        repo: https://github.com/lavavex/dotfiles.git
         dest: ~/
         clone: yes
       changed_when: false
 
     - name: Download .osx script from github
       get_url:
-        url: https://https://raw.githubusercontent.com/lavavex/dotfiles/refs/heads/main/.osx
+        url: https://raw.githubusercontent.com/lavavex/dotfiles/refs/heads/main/.osx
         dest: ~/.osx
         mode: "0755"
       changed_when: false
