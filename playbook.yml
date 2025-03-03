@@ -73,6 +73,7 @@
           - transmit
           - vmware-fusion
           - warp
+          - windows-app
           - zed
         state: present
 
