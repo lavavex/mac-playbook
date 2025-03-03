@@ -3,15 +3,6 @@
   hosts: localhost
   connection: local
   tasks:
-    - name: Check if Homebrew is installed
-      stat:
-        path: /usr/local/bin/brew
-      register: homebrew_check
-
-    - name: Install Homebrew if not present
-      shell: /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-      when: not homebrew_check.stat.exists
-
     - name: Update Homebrew
       command: brew update
       changed_when: false
@@ -36,7 +27,6 @@
           - transmit
           - vmware-fusion
           - warp
-          - zen-browser
           - zed
         state: present
 
@@ -56,11 +46,14 @@
         line: 'alias ll="ls -la"'
         state: present
 
+    - name: Download .osx script from github
+      get_url:
+        url: https://https://raw.githubusercontent.com/lavavex/dotfiles/refs/heads/main/.osx
+        dest: ~/.osx
+        mode: "0755"
+      changed_when: false
+
     - name: Run .osx script
-      git:
-        repo: lavavex/dotfiles
-        file: .osx
-        dest: ~/
       shell: ~/.osx --no-restart
       changed_when: false
       ignore_errors: yes
