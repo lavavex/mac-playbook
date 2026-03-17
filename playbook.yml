@@ -22,11 +22,11 @@
       - 'System Settings'
 
     dockitems_persist:
-      - name: "Floorp"
-        path: "/Applications/Floorp.app/"
+      - name: "Safari"
+        path: "/Applications/Safari.app/"
         pos: 2
-      - name: "Discord Canary"
-        path: "/Applications/Discord Canary.app"
+      - name: "Discord"
+        path: "/Applications/Discord.app"
         pos: 3
       - name: "Sublime Text"
         path: "/Applications/Sublime Text.app/"
@@ -55,23 +55,17 @@
       homebrew:
         name:
           - git
-          - mas
         state: present
 
     - name: Install Homebrew casks (GUI apps)
       homebrew_cask:
         name:
-          - brave-browser
-          - clip-studio-paint
-          - discord@canary
+          - discord
           - handbrake
           - jellyfin-media-player
           - linearmouse
-          - parsec
           - sublime-text
-          - slack
           - transmit
-          - vmware-fusion
           - warp
           - windows-app
           - zed
@@ -116,12 +110,4 @@
     - name: Docking
       import_role:
         name: geerlingguy.mac.dock
-
-    - name: MAS
-      community.general.mas:
-        id:
-          - 1451685025 #Wireguard-GUI
-          - 441258766 #Magnet
-        state: present
-        upgrade_all: true
 
